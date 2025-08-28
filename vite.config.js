@@ -4,7 +4,7 @@ import react from "@vitejs/plugin-react";
 export default defineConfig({
   plugins: [react()],
   define: {
-    "process.env": {}, // prevent process undefined errors
+    "process.env": {}, // fix process undefined
   },
   build: {
     lib: {
@@ -14,13 +14,8 @@ export default defineConfig({
       fileName: () => `feedback-widget.js`,
     },
     rollupOptions: {
-      external: ["react", "react-dom"],
-      output: {
-        globals: {
-          react: "React",
-          "react-dom": "ReactDOM",
-        },
-      },
+      // ✅ do not mark react/react-dom external
+      // bundle them into your widget
     },
   },
 });
